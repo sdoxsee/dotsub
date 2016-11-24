@@ -3,7 +3,7 @@
 
     angular
         .module('dotsubApp', [
-            'ngStorage', 
+            'ngStorage',
             'ngResource',
             'ngCookies',
             'ngAria',

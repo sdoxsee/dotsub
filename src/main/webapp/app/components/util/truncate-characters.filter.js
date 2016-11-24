@@ -4,7 +4,7 @@
     angular
         .module('dotsubApp')
         .filter('characters', characters);
-        
+
     function characters () {
         return charactersFilter;
 

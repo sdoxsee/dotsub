@@ -1,6 +1,7 @@
 package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.DotsubApp;
+
 import com.mycompany.myapp.domain.Item;
 import com.mycompany.myapp.repository.ItemRepository;
 
@@ -20,11 +21,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Base64Utils;
 
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.time.Instant;
 import java.time.ZonedDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.ZoneId;
 import java.util.List;
@@ -41,15 +42,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = DotsubApp.class)
 public class ItemResourceIntTest {
-    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").withZone(ZoneId.of("Z"));
-    private static final String DEFAULT_TITLE = "AAAAA";
-    private static final String UPDATED_TITLE = "BBBBB";
-    private static final String DEFAULT_DESCRIPTION = "AAAAA";
-    private static final String UPDATED_DESCRIPTION = "BBBBB";
 
-    private static final ZonedDateTime DEFAULT_CREATION_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
+    private static final String DEFAULT_TITLE = "AAAAAAAAAA";
+    private static final String UPDATED_TITLE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+
+    private static final ZonedDateTime DEFAULT_CREATION_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
     private static final ZonedDateTime UPDATED_CREATION_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
-    private static final String DEFAULT_CREATION_DATE_STR = dateTimeFormatter.format(DEFAULT_CREATION_DATE);
+    private static final String DEFAULT_CREATION_DATE_STR = DateTimeFormatter.ISO_INSTANT.format(DEFAULT_CREATION_DATE);
 
     private static final byte[] DEFAULT_LINK = TestUtil.createByteArray(1, "0");
     private static final byte[] UPDATED_LINK = TestUtil.createByteArray(2, "1");
@@ -72,7 +74,7 @@ public class ItemResourceIntTest {
 
     private Item item;
 
-    @PostConstruct
+    @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         ItemResource itemResource = new ItemResource();
@@ -89,8 +91,7 @@ public class ItemResourceIntTest {
      * if they test an entity which requires the current entity.
      */
     public static Item createEntity(EntityManager em) {
-        Item item = new Item();
-        item = new Item()
+        Item item = new Item()
                 .title(DEFAULT_TITLE)
                 .description(DEFAULT_DESCRIPTION)
                 .creationDate(DEFAULT_CREATION_DATE)

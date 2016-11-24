@@ -12,6 +12,9 @@
 
 
 spring:
+    profiles:
+        active: dev
+        include: swagger
     devtools:
         restart:
             enabled: true
@@ -46,6 +49,7 @@ spring:
         cache-seconds: 1
     thymeleaf:
         cache: false
+
 liquibase:
     contexts: dev
 
@@ -58,7 +62,6 @@ server:
 
 jhipster:
     cache: # Hibernate 2nd level cache, used by CacheConfiguration
-        timeToLiveSeconds: 3600
         ehcache:
             maxBytesLocalHeap: 16M
     security:
@@ -67,12 +70,9 @@ jhipster:
             key: e9527dac8661203b8c97fac32adeba5b9a1c2111
     mail: # specific JHipster mail property, for standard properties see MailProperties
         from: dotsub@localhost
+        baseUrl: # keep empty to use the server's default URL
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
-        spark:
-            enabled: false
-            host: localhost
-            port: 9999
         graphite:
             enabled: false
             host: localhost

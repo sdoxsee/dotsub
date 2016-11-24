@@ -9,7 +9,7 @@
 
     function ItemController ($scope, $state, DataUtils, Item, ParseLinks, AlertService) {
         var vm = this;
-        
+
         vm.items = [];
         vm.loadPage = loadPage;
         vm.page = 0;

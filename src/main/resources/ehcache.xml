@@ -36,4 +36,10 @@
     <cache name="com.mycompany.myapp.domain.User.persistentTokens"
            timeToLiveSeconds="3600">
     </cache>
-    </ehcache>
+
+    <cache name="com.mycompany.myapp.domain.Item"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <!-- jhipster-needle-ehcache-add-entry -->
+</ehcache>

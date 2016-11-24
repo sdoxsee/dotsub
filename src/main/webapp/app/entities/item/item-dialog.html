@@ -28,7 +28,7 @@
         <div class="form-group">
             <label class="control-label" for="field_creationDate">Creation Date</label>
                 <input id="field_creationDate" ng-disabled="true" type="text" class="form-control" name="creationDate" datetime-picker="{{dateformat}}" ng-model="vm.item.creationDate" is-open="vm.datePickerOpenStatus.creationDate"
-                  />
+                      />
         </div>
         <div class="form-group" ngf-drop ngf-change="vm.setLink($file, vm.item)">
             <label class="control-label" for="field_link">Link</label>
@@ -36,12 +36,12 @@
                 <div ng-if="vm.item.link" class="help-block clearfix">
                     <a class="pull-left" ng-click="vm.openFile(vm.item.linkContentType, vm.item.link)">open</a><br>
                     <span class="pull-left">{{vm.item.linkContentType}}, {{vm.byteSize(vm.item.link)}}</span>
-                    <button ng-click="vm.item.link=null;vm.item.linkContentType=null;"
+                    <button type="button" ng-click="vm.item.link=null;vm.item.linkContentType=null;"
                             class="btn btn-default btn-xs pull-right">
                         <span class="glyphicon glyphicon-remove"></span>
                     </button>
                 </div>
-                <button type="file" ngf-select class="btn btn-default btn-block"
+                <button type="button" ngf-select class="btn btn-default btn-block"
                         ngf-change="vm.setLink($file, vm.item)">
                     Add blob
                 </button>
